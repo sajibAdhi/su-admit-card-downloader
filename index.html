@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admit Card Downloader</title>
+</head>
+
+<body>
+    <div>
+        <label for="term">Term:</label>
+        <select name="term" id="term"></select>
+    </div>
+    <div>
+        <label for="year">Year:</label>
+        <select name="year" id="year"></select>
+    </div>
+    <div>
+        <label for="exam">Exam: </label>
+        <select name="exam" id="exam">
+
+        </select>
+    </div>
+    <div>
+        <label for="studenId">Student Id</label>
+        <input type="text" id="studentId">
+    </div>
+    <div>
+        <button id="download">Download</button>
+    </div>
+
+    <script>
+        "use strict";
+        const termField = document.getElementById('term');
+        const yearField = document.getElementById('year');
+        const examField = document.getElementById('exam');
+        const studentField = document.getElementById('studentId');
+        const downloadButton = document.getElementById('download');
+
+        const terms = [
+            "Spring",
+            "Summer",
+            "Fall",
+        ];
+
+        const year = [
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026",
+            "2027",
+            "2028",
+            "2029",
+            "2030",
+        ];
+
+        const exams = [
+            "Mid Term",
+            "Final",
+        ];
+
+        const download = () => {
+            const term = termField.value;
+            const year = yearField.value;
+            const exam = examField.value;
+            const studentId = studentField.value;
+
+            if (term === "" || studentId === "" || year === "" || exam === "") {
+                alert("Please fill all the fields");
+                return;
+            }
+            const url = `http://sue.su.edu.bd:5081/sonargaon_erp/student/notice_info/changed/${studentId}/${term}/${year}/${exam}/48/`;
+            window.open(url, '_blank');
+        };
+
+        termField.innerHTML = terms.map((term, index) => `<option value="${index + 1}">${term}</option>`).join('');
+        yearField.innerHTML = year.map((year) => `<option value="${year}">${year}</option>`).join('');
+        examField.innerHTML = exams.map((exam, index) => `<option value="${index +1}">${exam}</option>`).join('');
+        downloadButton.onclick = download;
+    </script>
+</body>
+
+</html>
